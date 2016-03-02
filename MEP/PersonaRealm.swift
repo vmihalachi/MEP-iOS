@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Maskyn. All rights reserved.
 //
 
+import RealmSwift
 import Foundation
-import Realm
 
-class PersonaRealm : RLMObject {
+class PersonaRealm : Object {
     dynamic var nome : String = ""
     dynamic var sezione : String = ""
     dynamic var commissione : Int = 0

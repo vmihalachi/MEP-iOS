@@ -7,24 +7,23 @@
 //
 
 import UIKit
-import Realm
+import RealmSwift
 
 class ViewController: UITableViewController {
     
-    var persone : RLMResults!
+    let realm = try! Realm()
+    var persone : Results<PersonaRealm>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // Get the default Realm
-        let realm = RLMRealm.defaultRealm()
-        persone = PersonaRealm.allObjects().sortedResultsUsingProperty("punti", ascending: false)
+        persone = realm.objects(PersonaRealm).sorted("punti", ascending: false)
         if persone.count <= 0 {
             
             fillData()
             
-            persone = PersonaRealm.allObjects()
+            persone = realm.objects(PersonaRealm).sorted("punti", ascending: false)
         }        
         
     }
@@ -53,26 +52,26 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell")
         
         // Configure the cell...
-        let persona = persone.objectAtIndex(UInt(indexPath.row)) as! PersonaRealm
+        let persona = persone[indexPath.row]
         
         var testoNome = "\(persona.nome)"
                 
-        for _ in count(testoNome) ... 30 {
+        for _ in testoNome.characters.count ... 30 {
             testoNome += " "
         }
         
         
-        var title = "\(testoNome)"
-        var subtitle = "punti:  \(persona.punti)  \t\t\t\t commissione:  \(persona.commissione) \t\t\t\t sezione:  \(persona.sezione)"
+        let title = "\(testoNome)"
+        let subtitle = "punti:  \(persona.punti)  \t\t\t\t commissione:  \(persona.commissione) \t\t\t\t sezione:  \(persona.sezione)"
         
         // set the text
-        cell.textLabel?.text = title
-        cell.detailTextLabel?.text = subtitle
+        cell!.textLabel?.text = title
+        cell!.detailTextLabel?.text = subtitle
         
-        return cell
+        return cell!
     }
 
 
@@ -82,22 +81,18 @@ class ViewController: UITableViewController {
         let alert = UIAlertController(title: "Nuova risoluzione?", message: "", preferredStyle: UIAlertControllerStyle.Alert)
         
         let ok = UIAlertAction(title: "Si", style: .Default, handler: { (action) -> Void in
-        
-            // Get the default Realm
-            let realm = RLMRealm.defaultRealm()
-            // You only need to do this once (per thread)
             
             // Add to the Realm inside a transaction
-            realm.beginWriteTransaction()
+            self.realm.beginWrite()
             
         for index in 0 ..< self.persone.count {
-            let persona = persone.objectAtIndex(index) as! PersonaRealm
+            let persona = self.persone[index]
             persona.punti += 300
         }
             
-            realm.commitWriteTransaction()
+            try! self.realm.commitWrite()
             
-        self.persone = PersonaRealm.allObjects().sortedResultsUsingProperty("punti", ascending: false)
+        self.persone = self.realm.objects(PersonaRealm).sorted("punti", ascending: false)
         
         self.tableView.reloadData()
             
@@ -121,18 +116,16 @@ class ViewController: UITableViewController {
         let ok = UIAlertAction(title: "Si", style: .Default, handler: { (action) -> Void in
             
             if inputTextField!.text == "1477" {
-                // Get the default Realm
-                let realm = RLMRealm.defaultRealm()
                 
-                realm.beginWriteTransaction()
+                self.realm.beginWrite()
                 
-                realm.deleteAllObjects()
+                self.realm.deleteAll()
                 
-                realm.commitWriteTransaction()
+                try! self.realm.commitWrite()
                 
                 self.fillData()
                 
-                self.persone = PersonaRealm.allObjects().sortedResultsUsingProperty("punti", ascending: false)
+                self.persone = self.realm.objects(PersonaRealm).sorted("punti", ascending: false)
                 
                 self.tableView.reloadData()
 
@@ -165,10 +158,10 @@ class ViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject] {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction] {
         
         
-        var chiama = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Chiama", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+        let chiama = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Chiama", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath) in
                 self.chiama(indexPath.row)
                 return
         })
@@ -179,7 +172,7 @@ class ViewController: UITableViewController {
     }
     
     func chiama (index : Int) {
-        let persona = persone.objectAtIndex(UInt(index)) as! PersonaRealm
+        let persona = persone[index]
         
         if persona.punti <= 0 {
             return
@@ -189,40 +182,36 @@ class ViewController: UITableViewController {
         
         let ok = UIAlertAction(title: "Si", style: .Default, handler: { (action) -> Void in
             
-            // Get the default Realm
-            let realm = RLMRealm.defaultRealm()
-            // You only need to do this once (per thread)
-            
             // Add to the Realm inside a transaction
-            realm.beginWriteTransaction()
+            self.realm.beginWrite()
             
             persona.punti -= 50
             //persona.interventiFatti++
             
-            realm.commitWriteTransaction()
+            try! self.realm.commitWrite()
             
-            var commissione = persona.commissione
-            var sezione = persona.sezione
+            let commissione = persona.commissione
+            let sezione = persona.sezione
             
-            var personeCommissione = PersonaRealm.objectsWhere("commissione == \(commissione)")
-            var personeSezione = PersonaRealm.objectsWhere("sezione == '\(sezione)'")
+            let personeCommissione = self.realm.objects(PersonaRealm).filter("commissione == \(commissione)")
+            let personeSezione = self.realm.objects(PersonaRealm).filter("sezione == '\(sezione)'")
             
             for index in 0 ..< personeCommissione.count {
                 
-                realm.beginWriteTransaction()
+                self.realm.beginWrite()
                 
-                var persona2 = personeCommissione.objectAtIndex(index) as! PersonaRealm
+                let persona2 = personeCommissione[index]
                 
                 persona2.punti -= 5
                 
-                realm.commitWriteTransaction()
+                try! self.realm.commitWrite()
             }
             
             for index in 0 ..< personeSezione.count {
                 
-                realm.beginWriteTransaction()
+                self.realm.beginWrite()
                 
-                var persona2 = personeSezione.objectAtIndex(index) as! PersonaRealm
+                let persona2 = personeSezione[index]
                 
                 persona2.punti -= 3
                 
@@ -232,12 +221,12 @@ class ViewController: UITableViewController {
                 
                 
                 
-                realm.commitWriteTransaction()
+                try! self.realm.commitWrite()
             }
             
             
             
-            self.persone = PersonaRealm.allObjects().sortedResultsUsingProperty("punti", ascending: false)
+            self.persone = self.realm.objects(PersonaRealm).sorted("punti", ascending: false)
             
             self.tableView.reloadData()
         })
@@ -252,90 +241,102 @@ class ViewController: UITableViewController {
     }
     
     func fillData() {
-        
-        // Get the default Realm
-        let realm = RLMRealm.defaultRealm()
     
-        var personeCreator = [
-            PersonaCreator(nome:"Pasquali Ettore", sezione:"A", commissione:1),
-            PersonaCreator(nome:"Akun Abigail", sezione:"A", commissione:1),
-            PersonaCreator(nome:"Baraldi Alice", sezione:"B", commissione:1),
-            PersonaCreator(nome:"Bighi Elisa", sezione:"F", commissione:1),
-            PersonaCreator(nome:"Bisero Sofia", sezione:"N", commissione:1),
-            PersonaCreator(nome:"Blagojevic Marija", sezione:"O", commissione:1),
-            PersonaCreator(nome:"De Simone Francesco", sezione:"P", commissione:1),
-            PersonaCreator(nome:"Fiorini Matilde", sezione:"P", commissione:1),
-            PersonaCreator(nome:"Marcello Vittorio", sezione:"Q", commissione:1),
-            PersonaCreator(nome:"Sgarbi Alessandro", sezione:"S", commissione:1),
-            PersonaCreator(nome:"Zecchi Tommaso", sezione:"F", commissione:1),
-            PersonaCreator(nome:"De Vincenti Gaia", sezione:"T", commissione:2),
-            PersonaCreator(nome:"Regragui Najma", sezione:"R", commissione:2),
-            PersonaCreator(nome:"Tartari Alessandro", sezione:"Q", commissione:2),
-            PersonaCreator(nome:"Aceto Elena", sezione:"P", commissione:2),
-            PersonaCreator(nome:"Visentin Nicola", sezione:"P", commissione:2),
-            PersonaCreator(nome:"Zucchini Gloria", sezione:"N", commissione:2),
-            PersonaCreator(nome:"Salcuni Claudia", sezione:"F", commissione:2),
-            PersonaCreator(nome:"Ghinato Claudia", sezione:"B", commissione:2),
-            PersonaCreator(nome:"Introini Elisa", sezione:"A", commissione:2),
-            PersonaCreator(nome:"Cibienne Maria Chiara", sezione:"N", commissione:2),
-            PersonaCreator(nome:"Ravagli Silvia", sezione:"A", commissione:3),
-            PersonaCreator(nome:"Marchetti Victoria", sezione:"B", commissione:3),
-            PersonaCreator(nome:"Santimone Olivia", sezione:"F", commissione:3),
-            PersonaCreator(nome:"Romeo Federica", sezione:"F", commissione:3),
-            PersonaCreator(nome:"Bottoni Chiara", sezione:"Q", commissione:3),
-            PersonaCreator(nome:"Della Vedova Francesco", sezione:"R", commissione:3),
-            PersonaCreator(nome:"Montalbano Mia", sezione:"A", commissione:4),
-            PersonaCreator(nome:"Stefanelli Edoardo", sezione:"B", commissione:4),
-            PersonaCreator(nome:"Tella Ilaria", sezione:"F", commissione:4),
-            PersonaCreator(nome:"Gasparetto Michele", sezione:"P", commissione:4),
-            PersonaCreator(nome:"Melloni Matteo", sezione:"Q", commissione:4),
-            PersonaCreator(nome:"Cavazzini Kevin", sezione:"Q", commissione:4),
-            PersonaCreator(nome:"Sulejmani Fiona", sezione:"S", commissione:4),
-            PersonaCreator(nome:"Zagatti Giorgia", sezione:"T", commissione:4),
-            PersonaCreator(nome:"Collina Irene", sezione:"T", commissione:4),
-            PersonaCreator(nome:"Benini Giovanni", sezione:"B", commissione:5),
-            PersonaCreator(nome:"Gualandi Vittoria", sezione:"F", commissione:5),
-            PersonaCreator(nome:"Cenci Silvia", sezione:"F", commissione:5),
-            PersonaCreator(nome:"Malacarne Miriam", sezione:"F", commissione:5),
-            PersonaCreator(nome:"Naldi Linda", sezione:"P", commissione:5),
-            PersonaCreator(nome:"Sandri Emiliano", sezione:"Q", commissione:5),
-            PersonaCreator(nome:"Zero Cecilia", sezione:"R", commissione:5),
-            PersonaCreator(nome:"Zappaterra Sofia", sezione:"T", commissione:5),
-            PersonaCreator(nome:"Porto Francesca", sezione:"A", commissione:6),
-            PersonaCreator(nome:"Bigoni Elena", sezione:"F", commissione:6),
-            PersonaCreator(nome:"Russo Giulia", sezione:"F", commissione:6),
-            PersonaCreator(nome:"Visentin Stefano", sezione:"P", commissione:6),
-            PersonaCreator(nome:"Pazzi Pierpaolo", sezione:"Q", commissione:6),
-            PersonaCreator(nome:"Tassoni Marta", sezione:"R", commissione:6),
-            PersonaCreator(nome:"Milcoli Arianna", sezione:"T", commissione:6),
-            PersonaCreator(nome:"Dolcetti Maria Vittoria", sezione:"B", commissione:7),
-            PersonaCreator(nome:"Marchetti Francesca", sezione:"F", commissione:7),
-            PersonaCreator(nome:"Bertoli Matteo", sezione:"N", commissione:7),
-            PersonaCreator(nome:"Orsi Michele", sezione:"N", commissione:7),
-            PersonaCreator(nome:"Fedozzi Marco", sezione:"P", commissione:7),
-            PersonaCreator(nome:"Marchi Lucrezia", sezione:"S", commissione:7),
-            PersonaCreator(nome:"Greghi Carlotta", sezione:"T", commissione:7),
-            PersonaCreator(nome:"Lazarov Dimitri", sezione:"A", commissione:8),
-            PersonaCreator(nome:"Piazzi Sara", sezione:"B", commissione:8),
-            PersonaCreator(nome:"Guarise Nina", sezione:"F", commissione:8),
-            PersonaCreator(nome:"Pasetti Maria Vittoria", sezione:"F", commissione:8),
-            PersonaCreator(nome:"Barison Gregorio", sezione:"N", commissione:8),
-            PersonaCreator(nome:"Veronesi Francesca", sezione:"P", commissione:8),
-            PersonaCreator(nome:"Calzolari Stefano", sezione:"Q", commissione:8),
-            PersonaCreator(nome:"Scarpante Irene", sezione:"S", commissione:8),
-            PersonaCreator(nome:"Scanavini Pietro", sezione:"T", commissione:8),
-            PersonaCreator(nome:"Chieregato Cecilia", sezione:"A", commissione:9),
-            PersonaCreator(nome:"Pasquali Elena", sezione:"B", commissione:9),
-            PersonaCreator(nome:"Grossi Caterina", sezione:"F", commissione:9),
-            PersonaCreator(nome:"Gualiumi Veronica", sezione:"O", commissione:9),
-            PersonaCreator(nome:"Xu Sheng Ran ", sezione:"Q", commissione:9),
-            PersonaCreator(nome:"Trecarichi Luca", sezione:"T", commissione:9),
-            PersonaCreator(nome:"Carletti Sebasiano", sezione:"B", commissione:10),
-            PersonaCreator(nome:"Mora Beatrice", sezione:"F", commissione:10),
-            PersonaCreator(nome:"Mazzoni Alberto", sezione:"N", commissione:10),
-            PersonaCreator(nome:"Sassoli Valentina", sezione:"Q", commissione:10),
-            PersonaCreator(nome:"Romagnoli Nicole", sezione:"Q", commissione:10)
+        let personeCreator = [
+            PersonaCreator(nome:"Zappaterra Nicolò", sezione:"N", commissione:	1	),
+            PersonaCreator(nome:"Benati Nicolò", sezione:"B", commissione:	1	),
+            PersonaCreator(nome:"Gonnella Julia", sezione:"F", commissione:	1	),
+            PersonaCreator(nome:"Cavallari Chiara", sezione:"G", commissione:	1	),
+            PersonaCreator(nome:"Paparella Pietro", sezione:"M", commissione:	1	),
+            PersonaCreator(nome:"Trevisani Federico", sezione:"M", commissione:	1	),
+            PersonaCreator(nome:"Poretti Giulia", sezione:"P", commissione:	1	),
+            PersonaCreator(nome:"Caselli Andrea", sezione:"R", commissione:	1	),
+            PersonaCreator(nome:"Ghetti Eleonora", sezione:"T", commissione:	1	),
+            PersonaCreator(nome:"Punzetti Francesca", sezione:"B", commissione:	2	),
+            PersonaCreator(nome:"Galletto Martina", sezione:"F", commissione:	2	),
+            PersonaCreator(nome:"Ferrari Camilla", sezione:"F", commissione:	2	),
+            PersonaCreator(nome:"Pedriali Alessandro", sezione:"B", commissione:	2	),
+            PersonaCreator(nome:"Travasoni Beatrice", sezione:"B", commissione:	2	),
+            PersonaCreator(nome:"Grenzi Marcello", sezione:"F", commissione:	2	),
+            PersonaCreator(nome:"Cavallino Oliviero", sezione:"G", commissione:	2	),
+            PersonaCreator(nome:"Antonellini Giulia", sezione:"N", commissione:	2	),
+            PersonaCreator(nome:"Zappi Miriam", sezione:"N", commissione:	2	),
+            PersonaCreator(nome:"Rapparini Giacomo", sezione:"P", commissione:	2	),
+            PersonaCreator(nome:"Grazzi Andrea", sezione:"T", commissione:	2	),
+            PersonaCreator(nome:"Simoni Francesca", sezione:"T", commissione:	3	),
+            PersonaCreator(nome:"Simoni Giulia", sezione:"T", commissione:	3	),
+            PersonaCreator(nome:"Bolognesi Michele", sezione:"B", commissione:	3	),
+            PersonaCreator(nome:"Leggieri Carlotta", sezione:"F", commissione:	3	),
+            PersonaCreator(nome:"Crepaldi Francesco ", sezione:"G", commissione:	3	),
+            PersonaCreator(nome:"Baroni Giulia", sezione:"N", commissione:	3	),
+            PersonaCreator(nome:"Zerbinati Vittorio", sezione:"N", commissione:	3	),
+            PersonaCreator(nome:"Modica Cristian", sezione:"Q", commissione:	3	),
+            PersonaCreator(nome:"Rambaldi Marta", sezione:"R", commissione:	3	),
+            PersonaCreator(nome:"Losi Anna Silvia", sezione:"T", commissione:	3	),
+            PersonaCreator(nome:"Bertelli Giovanni", sezione:"G", commissione:	4	),
+            PersonaCreator(nome:"Ghesini Viviana", sezione:"T", commissione:	4	),
+            PersonaCreator(nome:"Benini Alessia ", sezione:"F", commissione:	4	),
+            PersonaCreator(nome:"Mezzogori Chiara", sezione:"F", commissione:	4	),
+            PersonaCreator(nome:"Felisatti Pietro", sezione:"G", commissione:	4	),
+            PersonaCreator(nome:"Maietti Nicole", sezione:"T", commissione:	4	),
+            PersonaCreator(nome:"Manfrini Ilaria", sezione:"R", commissione:	5	),
+            PersonaCreator(nome:"Zanardi Virginia", sezione:"L", commissione:	5	),
+            PersonaCreator(nome:"Miculi Paola", sezione:"F", commissione:	5	),
+            PersonaCreator(nome:"Soflau Alina", sezione:"T", commissione:	5	),
+            PersonaCreator(nome:"Morandi Michele", sezione:"G", commissione:	5	),
+            PersonaCreator(nome:"Bussola Marielena", sezione:"N", commissione:	5	),
+            PersonaCreator(nome:"Castaldini Nicholas", sezione:"O", commissione:	5	),
+            PersonaCreator(nome:"Manfredini Francesco", sezione:"Q", commissione:	5	),
+            PersonaCreator(nome:"Finotti Francesco", sezione:"S", commissione:	5	),
+            PersonaCreator(nome:"Maresti Giorgia", sezione:"T", commissione:	5	),
+            PersonaCreator(nome:"Pavanini Filippo", sezione:"F", commissione:	6	),
+            PersonaCreator(nome:"Bressan Evelyn", sezione:"N", commissione:	6	),
+            PersonaCreator(nome:"Colombani Alessandro", sezione:"B", commissione:	6	),
+            PersonaCreator(nome:"Campi Aurora", sezione:"F", commissione:	6	),
+            PersonaCreator(nome:"Ulbani Kevin ", sezione:"F", commissione:	6	),
+            PersonaCreator(nome:"Piccoli Gianluca", sezione:"G", commissione:	6	),
+            PersonaCreator(nome:"Burini Martina", sezione:"M", commissione:	6	),
+            PersonaCreator(nome:"Bulgarelli Giulia", sezione:"Q", commissione:	6	),
+            PersonaCreator(nome:"Manfrini Emma", sezione:"F", commissione:	7	),
+            PersonaCreator(nome:"Tralli Marielena", sezione:"B", commissione:	7	),
+            PersonaCreator(nome:"Olrlandini Giorgio", sezione:"F", commissione:	7	),
+            PersonaCreator(nome:"Coppola Marika", sezione:"B", commissione:	7	),
+            PersonaCreator(nome:"Ceruti Pietro ", sezione:"N", commissione:	7	),
+            PersonaCreator(nome:"Pastore Mirko", sezione:"Q", commissione:	7	),
+            PersonaCreator(nome:"Pini Samuele", sezione:"F", commissione:	7	),
+            PersonaCreator(nome:"Prinzi Chiara", sezione:"T", commissione:	7	),
+            PersonaCreator(nome:"Ricci Elena", sezione:"M", commissione:	8	),
+            PersonaCreator(nome:"Lambertini Beatrice", sezione:"M", commissione:	8	),
+            PersonaCreator(nome:"Bortolotti Marco ", sezione:"G", commissione:	8	),
+            PersonaCreator(nome:"Masci Francesca ", sezione:"M", commissione:	8	),
+            PersonaCreator(nome:"Cusinatti Michele", sezione:"N", commissione:	8	),
+            PersonaCreator(nome:"Vitali Mattia", sezione:"O", commissione:	8	),
+            PersonaCreator(nome:"Navilli Alberto", sezione:"T", commissione:	8	),
+            PersonaCreator(nome:"Ramponi Viola", sezione:"T", commissione:	8	),
+            PersonaCreator(nome:"Natali Elena", sezione:"S", commissione:	9	),
+            PersonaCreator(nome:"De La Paz Miriam", sezione:"F", commissione:	9	),
+            PersonaCreator(nome:"Biondi Nicola", sezione:"G", commissione:	9	),
+            PersonaCreator(nome:"Frighi Camilla ", sezione:"N", commissione:	9	),
+            PersonaCreator(nome:"Palmieri Claudio", sezione:"P", commissione:	9	),
+            PersonaCreator(nome:"Palmese Giuseppe", sezione:"M", commissione:	9	),
+            PersonaCreator(nome:"Berro Emanuele", sezione:"T", commissione:	9	),
+            PersonaCreator(nome:"Rondinelli Vincenzo", sezione:"T", commissione:	9	),
+            PersonaCreator(nome:"Corazza Roberta", sezione:"F", commissione:	10	),
+            PersonaCreator(nome:"Verrigni Gioia", sezione:"Q", commissione:	10	),
+            PersonaCreator(nome:"Dalpasso Francesco", sezione:"B", commissione:	10	),
+            PersonaCreator(nome:"Ghirardello Ilaria", sezione:"F", commissione:	10	),
+            PersonaCreator(nome:"Tassinari Elisa", sezione:"G", commissione:	10	),
+            PersonaCreator(nome:"Tinghino Federica ", sezione:"F", commissione:	10	),
+            PersonaCreator(nome:"Simone Arturo ", sezione:"N", commissione:	10	),
+            PersonaCreator(nome:"Pigozzo Matteo", sezione:"P", commissione:	10	),
         ]
+        
+        
+        // Realms are used to group data together
+        let realm = try! Realm() // Create realm pointing to default file
+        
+        // Save your object
+        realm.beginWrite()
         
         for persona in personeCreator {
             
@@ -347,10 +348,10 @@ class ViewController: UITableViewController {
             personaRealm.interventiFatti = persona.interventiFatti
             personaRealm.punti = persona.punti
             
-            realm.transactionWithBlock() {
-                realm.addObject(personaRealm)
-            }
+            realm.add(personaRealm)
         }
+        
+        try! realm.commitWrite()
 
     }
 }

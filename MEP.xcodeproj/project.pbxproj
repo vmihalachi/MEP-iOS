@@ -7,17 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		045E43FE1A9B5FE900DDE26E /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045E43FD1A9B5FE900DDE26E /* Realm.framework */; };
-		045E44001A9B600C00DDE26E /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 045E43FF1A9B600C00DDE26E /* libc++.dylib */; };
-		045E44031A9B602000DDE26E /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E44021A9B602000DDE26E /* RLMSupport.swift */; };
 		045E44051A9B61AB00DDE26E /* PersonaRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E44041A9B61AB00DDE26E /* PersonaRealm.swift */; };
 		04684E3E1A75711A00515C5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04684E3D1A75711A00515C5F /* AppDelegate.swift */; };
 		04684E401A75711A00515C5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04684E3F1A75711A00515C5F /* ViewController.swift */; };
 		04684E451A75711A00515C5F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04684E441A75711A00515C5F /* Images.xcassets */; };
 		04684E481A75711A00515C5F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04684E461A75711A00515C5F /* LaunchScreen.xib */; };
 		04684E541A75711A00515C5F /* MEPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04684E531A75711A00515C5F /* MEPTests.swift */; };
-		04684E5E1A7573E200515C5F /* PersonaCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04684E5D1A7573E200515C5F /* PersonaCreator.swift */; };
 		0493F37F1A8E6ACC00682DFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0493F37E1A8E6ACC00682DFB /* Main.storyboard */; };
+		04B581C91C844DE700CEA2FF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B581C81C844DE700CEA2FF /* libc++.tbd */; };
+		04B581CF1C844E5600CEA2FF /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B581CE1C844E5600CEA2FF /* Realm.framework */; };
+		04B581D11C844E6500CEA2FF /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B581D01C844E6500CEA2FF /* RealmSwift.framework */; };
+		04B581D21C844E7200CEA2FF /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04B581D01C844E6500CEA2FF /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		04B581D31C844E7200CEA2FF /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04B581CE1C844E5600CEA2FF /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		04BE79C61C846260004FC553 /* PersonaCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE79C51C846260004FC553 /* PersonaCreator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,10 +32,31 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		04B581C71C84475300CEA2FF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04B581CA1C844E0700CEA2FF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				04B581D21C844E7200CEA2FF /* RealmSwift.framework in CopyFiles */,
+				04B581D31C844E7200CEA2FF /* Realm.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		045E43FD1A9B5FE900DDE26E /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
-		045E43FF1A9B600C00DDE26E /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		045E44021A9B602000DDE26E /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		045E44041A9B61AB00DDE26E /* PersonaRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonaRealm.swift; sourceTree = "<group>"; };
 		04684E381A75711A00515C5F /* MEP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04684E3C1A75711A00515C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,9 +67,11 @@
 		04684E4D1A75711A00515C5F /* MEPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MEPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04684E521A75711A00515C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04684E531A75711A00515C5F /* MEPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEPTests.swift; sourceTree = "<group>"; };
-		04684E5D1A7573E200515C5F /* PersonaCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonaCreator.swift; sourceTree = "<group>"; };
 		0493F37E1A8E6ACC00682DFB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		0493F3801A8E6BA000682DFB /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		04B581C81C844DE700CEA2FF /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		04B581CE1C844E5600CEA2FF /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		04B581D01C844E6500CEA2FF /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		04BE79C51C846260004FC553 /* PersonaCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonaCreator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +79,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				045E44001A9B600C00DDE26E /* libc++.dylib in Frameworks */,
-				045E43FE1A9B5FE900DDE26E /* Realm.framework in Frameworks */,
+				04B581CF1C844E5600CEA2FF /* Realm.framework in Frameworks */,
+				04B581C91C844DE700CEA2FF /* libc++.tbd in Frameworks */,
+				04B581D11C844E6500CEA2FF /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,19 +95,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		045E44011A9B602000DDE26E /* Swift */ = {
-			isa = PBXGroup;
-			children = (
-				045E44021A9B602000DDE26E /* RLMSupport.swift */,
-			);
-			path = Swift;
-			sourceTree = "<group>";
-		};
 		04684E2F1A75711A00515C5F = {
 			isa = PBXGroup;
 			children = (
-				045E43FF1A9B600C00DDE26E /* libc++.dylib */,
-				045E44011A9B602000DDE26E /* Swift */,
+				04B581D01C844E6500CEA2FF /* RealmSwift.framework */,
+				04B581CE1C844E5600CEA2FF /* Realm.framework */,
+				04B581C81C844DE700CEA2FF /* libc++.tbd */,
 				04684E3A1A75711A00515C5F /* MEP */,
 				04684E501A75711A00515C5F /* MEPTests */,
 				04684E391A75711A00515C5F /* Products */,
@@ -100,16 +119,14 @@
 		04684E3A1A75711A00515C5F /* MEP */ = {
 			isa = PBXGroup;
 			children = (
-				045E43FD1A9B5FE900DDE26E /* Realm.framework */,
 				04684E3D1A75711A00515C5F /* AppDelegate.swift */,
 				04684E3F1A75711A00515C5F /* ViewController.swift */,
-				0493F3801A8E6BA000682DFB /* Bridging-Header.h */,
 				04684E441A75711A00515C5F /* Images.xcassets */,
 				04684E461A75711A00515C5F /* LaunchScreen.xib */,
 				04684E3B1A75711A00515C5F /* Supporting Files */,
-				04684E5D1A7573E200515C5F /* PersonaCreator.swift */,
 				0493F37E1A8E6ACC00682DFB /* Main.storyboard */,
 				045E44041A9B61AB00DDE26E /* PersonaRealm.swift */,
+				04BE79C51C846260004FC553 /* PersonaCreator.swift */,
 			);
 			path = MEP;
 			sourceTree = "<group>";
@@ -149,6 +166,8 @@
 				04684E341A75711A00515C5F /* Sources */,
 				04684E351A75711A00515C5F /* Frameworks */,
 				04684E361A75711A00515C5F /* Resources */,
+				04B581C71C84475300CEA2FF /* Embed Frameworks */,
+				04B581CA1C844E0700CEA2FF /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -183,11 +202,14 @@
 		04684E301A75711A00515C5F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftMigration = 0720;
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Maskyn;
 				TargetAttributes = {
 					04684E371A75711A00515C5F = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = R4T7JG6E9G;
 					};
 					04684E4C1A75711A00515C5F = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -239,11 +261,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04684E5E1A7573E200515C5F /* PersonaCreator.swift in Sources */,
 				04684E401A75711A00515C5F /* ViewController.swift in Sources */,
 				04684E3E1A75711A00515C5F /* AppDelegate.swift in Sources */,
 				045E44051A9B61AB00DDE26E /* PersonaRealm.swift in Sources */,
-				045E44031A9B602000DDE26E /* RLMSupport.swift in Sources */,
+				04BE79C61C846260004FC553 /* PersonaCreator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +318,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -360,14 +382,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MEP",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MEP/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maskyn.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/mac/Desktop/XcodeProjects/MEP/MEP/Bridging-Header.h";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -375,14 +402,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MEP",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MEP/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maskyn.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/mac/Desktop/XcodeProjects/MEP/MEP/Bridging-Header.h";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
@@ -400,6 +432,7 @@
 				);
 				INFOPLIST_FILE = MEPTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maskyn.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MEP.app/MEP";
 			};
@@ -415,6 +448,7 @@
 				);
 				INFOPLIST_FILE = MEPTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maskyn.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MEP.app/MEP";
 			};

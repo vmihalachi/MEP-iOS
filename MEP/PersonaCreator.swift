@@ -15,7 +15,7 @@ class PersonaCreator {
     var interventiFatti : Int = 0
     var punti : Int = 0
     
-    init (var nome : String, sezione : String, commissione : Int) {
+    init ( nome : String, sezione : String, commissione : Int) {
         self.nome = nome
         self.sezione = sezione
         self.commissione = commissione
