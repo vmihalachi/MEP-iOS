@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		045D08EC1E4E239D00888256 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045D08EA1E4E239D00888256 /* Realm.framework */; };
+		045D08ED1E4E239D00888256 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 045D08EA1E4E239D00888256 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		045D08EE1E4E239D00888256 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045D08EB1E4E239D00888256 /* RealmSwift.framework */; };
+		045D08EF1E4E239D00888256 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 045D08EB1E4E239D00888256 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		045E44051A9B61AB00DDE26E /* PersonaRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E44041A9B61AB00DDE26E /* PersonaRealm.swift */; };
 		04684E3E1A75711A00515C5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04684E3D1A75711A00515C5F /* AppDelegate.swift */; };
 		04684E401A75711A00515C5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04684E3F1A75711A00515C5F /* ViewController.swift */; };
@@ -15,10 +19,6 @@
 		04684E541A75711A00515C5F /* MEPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04684E531A75711A00515C5F /* MEPTests.swift */; };
 		0493F37F1A8E6ACC00682DFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0493F37E1A8E6ACC00682DFB /* Main.storyboard */; };
 		04B581C91C844DE700CEA2FF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B581C81C844DE700CEA2FF /* libc++.tbd */; };
-		04B581CF1C844E5600CEA2FF /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B581CE1C844E5600CEA2FF /* Realm.framework */; };
-		04B581D11C844E6500CEA2FF /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B581D01C844E6500CEA2FF /* RealmSwift.framework */; };
-		04B581D21C844E7200CEA2FF /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04B581D01C844E6500CEA2FF /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		04B581D31C844E7200CEA2FF /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04B581CE1C844E5600CEA2FF /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04BE79C61C846260004FC553 /* PersonaCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BE79C51C846260004FC553 /* PersonaCreator.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +39,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				045D08EF1E4E239D00888256 /* RealmSwift.framework in Embed Frameworks */,
+				045D08ED1E4E239D00888256 /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,14 +51,14 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				04B581D21C844E7200CEA2FF /* RealmSwift.framework in CopyFiles */,
-				04B581D31C844E7200CEA2FF /* Realm.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		045D08EA1E4E239D00888256 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		045D08EB1E4E239D00888256 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		045E44041A9B61AB00DDE26E /* PersonaRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonaRealm.swift; sourceTree = "<group>"; };
 		04684E381A75711A00515C5F /* MEP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04684E3C1A75711A00515C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,8 +71,6 @@
 		04684E531A75711A00515C5F /* MEPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEPTests.swift; sourceTree = "<group>"; };
 		0493F37E1A8E6ACC00682DFB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		04B581C81C844DE700CEA2FF /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		04B581CE1C844E5600CEA2FF /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
-		04B581D01C844E6500CEA2FF /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		04BE79C51C846260004FC553 /* PersonaCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonaCreator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,9 +79,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04B581CF1C844E5600CEA2FF /* Realm.framework in Frameworks */,
+				045D08EC1E4E239D00888256 /* Realm.framework in Frameworks */,
 				04B581C91C844DE700CEA2FF /* libc++.tbd in Frameworks */,
-				04B581D11C844E6500CEA2FF /* RealmSwift.framework in Frameworks */,
+				045D08EE1E4E239D00888256 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,8 +98,8 @@
 		04684E2F1A75711A00515C5F = {
 			isa = PBXGroup;
 			children = (
-				04B581D01C844E6500CEA2FF /* RealmSwift.framework */,
-				04B581CE1C844E5600CEA2FF /* Realm.framework */,
+				045D08EA1E4E239D00888256 /* Realm.framework */,
+				045D08EB1E4E239D00888256 /* RealmSwift.framework */,
 				04B581C81C844DE700CEA2FF /* libc++.tbd */,
 				04684E3A1A75711A00515C5F /* MEP */,
 				04684E501A75711A00515C5F /* MEPTests */,
@@ -204,15 +204,18 @@
 			attributes = {
 				LastSwiftMigration = 0720;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Maskyn;
 				TargetAttributes = {
 					04684E371A75711A00515C5F = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = R4T7JG6E9G;
+						DevelopmentTeam = 4M6UE6X2MT;
+						LastSwiftMigration = 0820;
 					};
 					04684E4C1A75711A00515C5F = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 4M6UE6X2MT;
+						LastSwiftMigration = 0820;
 						TestTargetID = 04684E371A75711A00515C5F;
 					};
 				};
@@ -311,8 +314,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -321,6 +326,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -333,7 +339,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -355,8 +361,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -364,15 +372,17 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -384,17 +394,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 4M6UE6X2MT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MEP",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MEP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.maskyn.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -404,17 +417,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 4M6UE6X2MT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MEP",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MEP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.maskyn.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -422,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 4M6UE6X2MT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -434,6 +451,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.maskyn.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MEP.app/MEP";
 			};
 			name = Debug;
@@ -442,6 +460,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 4M6UE6X2MT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -450,6 +469,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.maskyn.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MEP.app/MEP";
 			};
 			name = Release;

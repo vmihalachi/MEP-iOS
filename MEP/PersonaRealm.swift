@@ -13,6 +13,5 @@ class PersonaRealm : Object {
     dynamic var nome : String = ""
     dynamic var sezione : String = ""
     dynamic var commissione : Int = 0
-    dynamic var interventiFatti : Int = 0
     dynamic var punti : Int = 0
 }
